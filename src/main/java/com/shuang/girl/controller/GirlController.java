@@ -40,8 +40,7 @@ public class GirlController {
     @PostMapping(value = "/girls")
     public Result<Girl> grilAdd(@Valid Girl girl, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            return null;
-//            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
         return ResultUtil.success(girlRepository.save(girl));
     }
