@@ -1,8 +1,10 @@
 package com.shuang.girl.controller;
 
+import com.shuang.girl.result.Result;
 import com.shuang.girl.service.GirlService;
 import com.shuang.girl.domain.Girl;
 import com.shuang.girl.repository.GirlRepository;
+import com.shuang.girl.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +38,12 @@ public class GirlController {
     * 新增女生
     * */
     @PostMapping(value = "/girls")
-    public Girl grilAdd(@Valid Girl girl, BindingResult bindingResult) {
+    public Result<Girl> grilAdd(@Valid Girl girl, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
             return null;
+//            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
-        return girlRepository.save(girl);
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /*
@@ -89,6 +91,11 @@ public class GirlController {
     @PostMapping(value = "/girls/two")
     public void girlAddTwo() {
         girlService.girlAddTwo();
+    }
+
+    @GetMapping(value = "/girls/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+        girlService.checkAge(id);
     }
 
 }
