@@ -1,6 +1,7 @@
 package com.shuang.girl.enums;
 
 public enum ResultEnum {
+    UNKNOW_ERROW(-1,"未知错误"),
     PRIMARY_SCHOOL(100,"小学"),
     MIDDLE_SCHOOL(101,"中学"),
     ;
